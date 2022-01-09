@@ -25,6 +25,11 @@ const Product = ({ product }) => {
         </Card.Text>        
 
         <Card.Text as='h3'>&euro;&nbsp;{product.price}</Card.Text>
+        {product.discount > 0 ? (
+            <Card.Text as='div' className='discount-alert'>{product.discount}% Discount</Card.Text>
+        ) : (
+            <Card.Text as='div'>&nbsp;</Card.Text>
+        )}
       </Card.Body>
     </Card>
   )

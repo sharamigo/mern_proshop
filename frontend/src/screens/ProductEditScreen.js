@@ -14,6 +14,7 @@ const ProductEditScreen = ({ match, history }) => {
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
+  const [discount, setProductDiscount] = useState(0)
   const [image, setImage] = useState('')
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
@@ -43,11 +44,12 @@ const ProductEditScreen = ({ match, history }) => {
       } else {
         setName(product.name)
         setPrice(product.price)
+        setProductDiscount(product.discount)
         setImage(product.image)
         setBrand(product.brand)
         setCategory(product.category)
         setCountInStock(product.countInStock)
-        setDescription(product.description)
+        setDescription(product.description)       
       }
     }
   }, [dispatch, history, productId, product, successUpdate])
@@ -76,12 +78,14 @@ const ProductEditScreen = ({ match, history }) => {
   }
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault()   
+
     dispatch(
       updateProduct({
         _id: productId,
         name,
-        price,
+        price: (discount > 0) ? price-(price*discount/100).toLocaleString(undefined, {maximumFractionDigits:2}) : price,
+        discount,
         image,
         brand,
         category,
@@ -125,6 +129,19 @@ const ProductEditScreen = ({ match, history }) => {
                 onChange={(e) => setPrice(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
+           
+              <Form.Label>Discount (off %)</Form.Label>
+              <Form.Control
+                value={discount}
+                onChange={(e) => setProductDiscount(e.target.value)} 
+                as='select'>
+                <option value={0}>no discount</option>
+                <option value={10}>10 %</option>
+                <option value={20}>20 %</option>
+                <option value={30}>30 %</option>
+              </Form.Control>
+            
 
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>

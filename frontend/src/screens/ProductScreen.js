@@ -84,7 +84,12 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>
+                  Price: EUR&nbsp;{product.price}
+                  {product.discount > 0 && (
+                    <ListGroup.Item className='discount-alert'>{product.discount}% Discount</ListGroup.Item>
+                  )}
+                </ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>

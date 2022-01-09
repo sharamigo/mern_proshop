@@ -16,6 +16,18 @@ const reviewSchema = mongoose.Schema(
   }
 )
 
+const unitSchema = mongoose.Schema(
+  {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Product'
+    },
+    name: { type: String, required: true },
+    unitSign: { type: String, required: true}
+  }
+)
+
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -43,7 +55,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    reviews: [reviewSchema],
+    reviews: [reviewSchema],  
     rating: {
       type: Number,
       required: true,
@@ -57,6 +69,11 @@ const productSchema = mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      default: 0,
+    },
+    discount: {
+      type: Number,
+      required: true,     
       default: 0,
     },
     countInStock: {

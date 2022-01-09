@@ -20,6 +20,12 @@ h2 {
   margin: 0.1rem;
 }
 
+.discount-alert {
+  color: #000;
+  background-color: yellow;
+  font-weight: bold;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,
